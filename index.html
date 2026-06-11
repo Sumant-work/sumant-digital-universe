@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Sumant's Space liquid glass social universe with direct social links and contact portal."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sumant's Space" />
+    <meta property="og:description" content="Here I am, connect with me" />
+    <meta property="og:image" content="./assets/social-preview.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sumant's Space" />
+    <meta name="twitter:description" content="Here I am, connect with me" />
+    <meta name="twitter:image" content="./assets/social-preview.png" />
+    <meta name="theme-color" content="#071018" />
+    <title>Sumant's Space | Social Universe</title>
+    <link rel="image_src" href="./assets/social-preview.png" />
+    <link rel="preload" href="./assets/sumant-avatar-sticker.webp" as="image" />
+    <link rel="stylesheet" href="./src/styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js"
+        }
+      }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script type="module" src="./src/app.js"></script>
+  </head>
+  <body>
+    <div class="app-shell" id="appShell">
+      <canvas id="universeCanvas" aria-hidden="true"></canvas>
+      <div class="grain" aria-hidden="true"></div>
+      <div class="audio-wavefield" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <audio id="siteSong" src="./assets/co2.mp3" preload="none" loop></audio>
+
+      <div class="intro" id="intro">
+        <div class="intro__space-scene" aria-hidden="true">
+          <span class="intro__planet"></span>
+          <span class="intro__comet"></span>
+          <span class="intro__spark intro__spark--one"></span>
+          <span class="intro__spark intro__spark--two"></span>
+          <span class="intro__spark intro__spark--three"></span>
+        </div>
+        <div class="intro__mark">
+          <span></span>
+          <span></span>
+          <span></span>
+          <b class="intro__rocket"></b>
+          <i class="intro__moon"></i>
+        </div>
+        <p class="intro__eyebrow">Sumant's Space</p>
+        <h1>Opening your orbit</h1>
+        <div class="intro__meter" aria-hidden="true"><span></span></div>
+        <button class="intro__skip icon-button" id="skipIntro" type="button" aria-label="Skip intro" title="Skip intro">
+          <i data-lucide="fast-forward"></i>
+        </button>
+      </div>
+
+      <header class="topbar">
+        <div class="topbar__controls" aria-label="Universe controls">
+          <button class="icon-button" id="audioToggle" type="button" aria-label="Play or pause song" title="Play or pause song">
+            <i data-lucide="play"></i>
+          </button>
+          <button class="icon-button" id="moodToggle" type="button" aria-label="Toggle mood" title="Toggle mood">
+            <i data-lucide="moon"></i>
+          </button>
+          <button class="icon-button" id="resetView" type="button" aria-label="Reset view" title="Reset view">
+            <i data-lucide="rotate-ccw"></i>
+          </button>
+        </div>
+      </header>
+
+      <main class="universe-stage" aria-label="Sumant social universe">
+        <svg class="connections" id="connections" aria-hidden="true"></svg>
+        <div class="core" id="core">
+          <div class="core__rings" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="avatar-shell">
+            <img src="./assets/sumant-avatar-sticker.webp" alt="Animated sticker portrait of Sumant" />
+          </div>
+          <div class="core__label">
+            <span>Social core</span>
+            <strong>Sumant</strong>
+          </div>
+        </div>
+        <div class="node-layer" id="nodeLayer"></div>
+      </main>
+
+      <aside class="identity-strip" aria-label="Profile note">
+        <span>Here I am, connect with me</span>
+      </aside>
+
+      <div class="panel-backdrop" id="panelBackdrop"></div>
+      <section class="glass-panel" id="glassPanel" aria-live="polite" aria-hidden="true">
+        <button class="icon-button panel-close" id="panelClose" type="button" aria-label="Close panel" title="Close panel">
+          <i data-lucide="x"></i>
+        </button>
+        <div class="panel-content" id="panelContent"></div>
+      </section>
+
+      <div class="contact-beam" id="contactBeam" aria-hidden="true"></div>
+    </div>
+  </body>
+</html>
