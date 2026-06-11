@@ -1006,10 +1006,10 @@ a {
   padding: 28px;
   text-align: center;
   background:
+    radial-gradient(circle at 50% 44%, rgba(2, 4, 9, 0.82), transparent 28%),
     radial-gradient(circle at 50% 34%, rgba(126, 217, 255, 0.14), transparent 34%),
-    radial-gradient(circle at 62% 48%, rgba(255, 183, 206, 0.1), transparent 30%),
-    linear-gradient(180deg, rgba(2, 4, 9, 0.96), rgba(2, 4, 9, 0.88)),
-    #020409;
+    radial-gradient(circle at 62% 48%, rgba(255, 183, 206, 0.1), transparent 30%);
+  pointer-events: none;
   animation: introAutoExit 3.3s ease forwards;
 }
 
@@ -1251,7 +1251,7 @@ a {
   82% {
     opacity: 1;
     visibility: visible;
-    pointer-events: auto;
+    pointer-events: none;
   }
   100% {
     opacity: 0;
