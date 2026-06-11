@@ -134,7 +134,31 @@ function refreshIcons() {
         focusable: "false",
       },
     });
+    return;
   }
+
+  const fallbackIcons = {
+    "fast-forward": ">>",
+    github: "GH",
+    ghost: "SC",
+    instagram: "IG",
+    linkedin: "in",
+    moon: "◐",
+    "music-2": "♪",
+    pause: "||",
+    play: ">",
+    "rotate-ccw": "↺",
+    rocket: "^",
+    send: ">",
+    "tree-pine": "LT",
+    x: "x",
+    youtube: "YT",
+  };
+
+  document.querySelectorAll("i[data-lucide]").forEach((icon) => {
+    icon.classList.add("icon-fallback");
+    icon.textContent = fallbackIcons[icon.dataset.lucide] || "*";
+  });
 }
 
 function isMobileLayout() {

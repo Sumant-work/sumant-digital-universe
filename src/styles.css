@@ -284,6 +284,12 @@ a {
   stroke-width: 1.8;
 }
 
+.icon-fallback {
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1;
+}
+
 @keyframes buttonPulse {
   from {
     opacity: 0.72;
@@ -1004,11 +1010,14 @@ a {
     radial-gradient(circle at 62% 48%, rgba(255, 183, 206, 0.1), transparent 30%),
     linear-gradient(180deg, rgba(2, 4, 9, 0.96), rgba(2, 4, 9, 0.88)),
     #020409;
+  animation: introAutoExit 3.3s ease forwards;
 }
 
 .intro.is-hidden {
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
+  animation: none;
 }
 
 .intro__space-scene {
@@ -1234,6 +1243,20 @@ a {
   }
   to {
     transform: scaleX(1);
+  }
+}
+
+@keyframes introAutoExit {
+  0%,
+  82% {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 }
 
