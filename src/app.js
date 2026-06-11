@@ -18,9 +18,14 @@ const siteSong = $("#siteSong");
 const moodToggle = $("#moodToggle");
 const resetView = $("#resetView");
 const contactBeam = $("#contactBeam");
+const musicDock = $("#musicDock");
+const musicFrame = $("#musicFrame");
+const musicClose = $("#musicClose");
 
 const linktreeUrl = "https://linktr.ee/Hey_sumant";
 const songFallbackUrl = "https://open.spotify.com/search/Prateek%20Kuhad%20Co2";
+const officialSongEmbedUrl = "https://www.youtube-nocookie.com/embed/U2SVCCENLjE?autoplay=1&playsinline=1&rel=0&modestbranding=1";
+const useEmbeddedSongPlayer = new URLSearchParams(window.location.search).has("embed") || window.location.hostname.endsWith("github.io");
 const contactDestination = {
   // Add one destination when you want real contact submissions.
   email: "",
@@ -125,6 +130,7 @@ let sceneState;
 let audioEnabled = false;
 let audioPointerHandled = false;
 let localSongAvailable = true;
+let embeddedSongActive = false;
 
 function refreshIcons() {
   if (window.lucide) {
@@ -655,7 +661,7 @@ function initPointerParallax() {
 
 function setAudioIcon() {
   audioToggle.innerHTML = `<i data-lucide="${audioEnabled ? "pause" : "play"}"></i>`;
-  const inactiveLabel = localSongAvailable ? "Play song" : "Open song";
+  const inactiveLabel = "Play song";
   audioToggle.setAttribute("aria-label", audioEnabled ? "Pause song" : inactiveLabel);
   audioToggle.setAttribute("title", audioEnabled ? "Pause song" : inactiveLabel);
   audioToggle.classList.toggle("is-active", audioEnabled);
@@ -667,7 +673,40 @@ function openSongFallback() {
   window.open(songFallbackUrl, "_blank", "noopener,noreferrer");
 }
 
+function openEmbeddedSong() {
+  if (!musicDock || !musicFrame) {
+    openSongFallback();
+    return;
+  }
+
+  musicFrame.src = officialSongEmbedUrl;
+  musicDock.classList.add("is-open");
+  musicDock.setAttribute("aria-hidden", "false");
+  embeddedSongActive = true;
+  audioEnabled = true;
+  setAudioIcon();
+}
+
+function closeEmbeddedSong() {
+  if (musicDock) {
+    musicDock.classList.remove("is-open");
+    musicDock.setAttribute("aria-hidden", "true");
+  }
+  if (musicFrame) {
+    musicFrame.src = "about:blank";
+  }
+  embeddedSongActive = false;
+  audioEnabled = false;
+  setAudioIcon();
+}
+
 async function verifyLocalSong() {
+  if (useEmbeddedSongPlayer) {
+    localSongAvailable = false;
+    setAudioIcon();
+    return;
+  }
+
   if (!siteSong?.src) {
     localSongAvailable = false;
     setAudioIcon();
@@ -685,9 +724,9 @@ async function verifyLocalSong() {
 
 async function playSong() {
   if (!siteSong) return false;
-  if (!localSongAvailable) {
-    openSongFallback();
-    return false;
+  if (useEmbeddedSongPlayer || !localSongAvailable) {
+    openEmbeddedSong();
+    return true;
   }
 
   siteSong.volume = 0.62;
@@ -708,6 +747,10 @@ async function playSong() {
 }
 
 function pauseSong() {
+  if (embeddedSongActive) {
+    closeEmbeddedSong();
+    return;
+  }
   if (!siteSong) return;
   siteSong.pause();
   audioEnabled = false;
@@ -779,6 +822,7 @@ function initEvents() {
   skipIntro.addEventListener("click", hideIntro);
   panelClose.addEventListener("click", closePanel);
   panelBackdrop.addEventListener("click", closePanel);
+  musicClose.addEventListener("click", closeEmbeddedSong);
   audioToggle.addEventListener("pointerdown", (event) => {
     event.preventDefault();
     audioPointerHandled = true;

@@ -21,7 +21,7 @@
     <title>Sumant's Space | Social Universe</title>
     <link rel="image_src" href="https://sumant-work.github.io/sumant-digital-universe/assets/social-preview.png" />
     <link rel="preload" href="./assets/sumant-avatar-sticker.webp?v=20260611" as="image" />
-    <link rel="stylesheet" href="./src/styles.css?v=20260611e" />
+    <link rel="stylesheet" href="./src/styles.css?v=20260611f" />
     <script type="importmap">
       {
         "imports": {
@@ -31,7 +31,7 @@
     </script>
     <script defer src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script type="module" src="./src/app.js?v=20260611c"></script>
+    <script type="module" src="./src/app.js?v=20260611f"></script>
   </head>
   <body>
     <div class="app-shell" id="appShell">
@@ -113,6 +113,25 @@
       </section>
 
       <div class="contact-beam" id="contactBeam" aria-hidden="true"></div>
+
+      <section class="music-dock" id="musicDock" aria-label="Embedded song player" aria-hidden="true">
+        <div class="music-dock__chrome">
+          <span class="music-dock__pulse" aria-hidden="true"></span>
+          <span>C-02 signal</span>
+          <button class="music-dock__close" id="musicClose" type="button" aria-label="Close song player" title="Close song player">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <div class="music-dock__frame">
+          <iframe
+            id="musicFrame"
+            title="Prateek Kuhad - Co2 official audio"
+            allow="autoplay; encrypted-media; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
     </div>
   </body>
 </html>
